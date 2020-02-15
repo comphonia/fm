@@ -1,9 +1,9 @@
-# FM (File Manager)
-### A minimalistic multi-media manager.
+# Media Manager
+### A minimalistic, multi-media manager.
 
+Media manager provides a basic layout for a web-based media manager. Open to customization.
 
-
-fm provides a basic layout for a media manager and is open to customization.
+![img](https://github.com/comphonia/mediamanager/blob/master/docs/p1.PNG?raw=true)
 
 Icons used for this project can be found on [feather-icons](https://feathericons.com/)
 

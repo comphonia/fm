@@ -1,10 +1,110 @@
 <html>
-    <head>
-    <link rel="stylesheet" href="./css/fm.css" />
-    <script defer src="./js/fm.js"></script>
-</head>
+  <head>
+    <link rel="stylesheet" href="./css/mediamanager.css" />
+    <script defer src="./js/mediamanager.js"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
-<body style="background-color: beige">
-    <div id="fm"></div>
-</body></html>
+    <style>
+        body{overflow: hidden;}
+     .demo{
+         width: 100%;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         overflow: hidden;
+     }
+     .demo button{
+         padding: 2rem;
+         background-color: #fff;
+         border: 1px dashed #ccc;
+         font-size: 1.3rem;
+         margin: 2rem 0;
+         cursor: pointer;
+     }
+     footer{
+         position: absolute;
+         bottom: 10px;
+         text-align: center;
+         width: 100%;
+     }
+    </style>
+  </head>
 
+  <body style="background-color: #fff">
+    <div id="mediamanager"></div>
+    <div class="demo">
+        <i>open your dev console</i>
+      <button onclick="demo()">Show mediamanager</button>
+<a class="github-button" href="https://github.com/comphonia/mediamanager" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork comphonia/mediamanager on GitHub">Fork</a>
+    </div>
+
+
+    <footer>❤️ &mdash; <a href="http://comphonia.com">comphonia</a></footer>
+
+
+
+    <script>
+      /* demo */
+      demo = function() {
+        window.mediamanager(
+          "mediamanager",
+          { fnUpload: onUpload, fnDownload: onDownload },insertFile
+        );
+
+        const file = {
+          url:
+            "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=134&q=90",
+          src:
+            "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=134&q=90",
+          name: "file",
+          type: "jpg"
+        };
+
+        let files = [];
+
+        for (let i = 0; i < 20; i++) {
+          files.push({...file, name: file.name+`-${i}`});
+        }
+
+        /**
+         * POST the file/files to the server. return a promise that resolves to null (or a url if you plan on extending it).
+         *
+         * @param {*} files
+         * @returns {Promise<null>}
+         */
+        async function onUpload(files) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              console.log(files);
+              resolve(null);
+            }, 1000);
+          });
+        }
+        /**
+         * GET file/files to the server. return a promise that resolves to an array of JSON
+         *
+         * @returns {Promise<Object[]>}
+         */
+        async function onDownload() {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(files);
+            }, 1000);
+          });
+        }
+        /**
+         * callback that's called once files are selected and inserted / editor is closed
+         * generate markup for a content editor using the returned file(s)
+         *
+         * @param {*} files
+         */
+        function insertFile(files) {
+          console.log(`<img src=${files[0].url} />`);
+        }
+      };
+    </script>
+  </body>
+</html>

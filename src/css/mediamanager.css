@@ -9,14 +9,18 @@
 }
 
 /*manager Styling*/
+
 .manager-background {
-  max-width: 1100px;
+  width: 1100px;
+  max-width: 100%;
   height: 500px;
   margin: auto;
   background-color: #fff;
   box-shadow: 1px 0 0 0 #bbb, 0 1px 0 0 #bbb, 1px 1px 0 0 #bbb,
     1px 0 0 0 #bbb inset, 0 1px 0 0 #bbb inset;
   color: #373a3c;
+  position: absolute;
+  z-index: 5;
 }
 
 .manager-background.maximize {
@@ -24,8 +28,8 @@
   max-width: 100%;
   height: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0 !important;
+  left: 0 !important;
 }
 .manager-background.maximize > .manager-container {
   height: 90%;
@@ -39,7 +43,10 @@
   height: 45px;
   display: flex;
   justify-content: space-between;
-  z-index: 5;
+  cursor: move;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 
 .manager-header div {
@@ -48,16 +55,18 @@
 
 .manager-container {
   position: relative;
+  margin-top: 10px;
+  height: calc(100% - 55px);
+
 }
 
 .manager-content {
-  margin-top: 10px;
-  padding: 5px 15px 10px;
-  height: calc(100% - 55px);
-  overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  height: 100%;
+  padding: 5px 15px 10px;
+  overflow-y: scroll;
 }
 
 .manager-item {
@@ -195,12 +204,15 @@
 }
 
 .manager-uploadinput {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    opacity: 0;
-    cursor: pointer;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+.manager-searchinput {
+  z-index: 5;
 }
