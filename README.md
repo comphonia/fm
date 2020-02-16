@@ -11,6 +11,6 @@ Icons used for this project can be found on [feather-icons](https://feathericons
 - [ ] Add support multiple file uploads
 - [ ] Add support for multi-file selections
 - [ ] Add visual feedback for data transmission (spinners etc.)
-- [ ] Filter file extensions based on `fmOptions.allowedExtensions`
+- [ ] Filter file extensions based on `mediamanagerOptions.allowedExtensions`
 - [ ] Configure dev environment & build workflow
 - [ ] Documentation 📝
