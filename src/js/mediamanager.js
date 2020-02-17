@@ -110,6 +110,7 @@ window.mediamanager = function(mediamanagerId, options, callback) {
 
     const exitManager = () => {
         mediamanager.classList.add('hidden');
+        document.body.style.overflowY = 'visible';
     };
 
     let isMaximized = false;
@@ -121,7 +122,7 @@ window.mediamanager = function(mediamanagerId, options, callback) {
             document.body.style.overflowY = 'hidden';
         } else {
             maximizeBtn.innerHTML = maximizeButtonComponent();
-            document.body.style.overflowY = 'auto';
+            document.body.style.overflowY = 'visible';
         }
     };
 
@@ -292,41 +293,43 @@ window.mediamanager = function(mediamanagerId, options, callback) {
 
     const fileManagerComponent = () => {
         return `
-      <div class="manager-background">
-      <div class="manager-header">
-          <div class="manager-headerfloatleft">
-              <button class="manager-btn exitbtn" type="button"></button>
-              <button class="manager-btn uploadbtn" type="button"></button>
-              <button class="manager-btn maxbtn" type="button"> </button>
-          </div>
-          <div class="manager-headerfloatright">
-              <input type="search" placeholder="search" class="manager-searchinput" />
-          </div>
-      </div>
-      <div class="manager-container">
-          <button class="manager-insertbtn insertbtn hidden" type="button">
-              <span class="manager-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                      <polyline points="14 2 14 8 20 8"></polyline>
-                      <line x1="12" y1="18" x2="12" y2="12"></line>
-                      <line x1="9" y1="15" x2="15" y2="15"></line>
-                  </svg></span>
-              <span class="manager-btntext ">Insert File</span>
-          </button>
-          <div class="manager-uploader hidden">
-              <div class="manager-uploadzone">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="17 8 12 3 7 8"></polyline>
-                      <line x1="12" y1="3" x2="12" y2="15"></line>
-                  </svg>
-                  <input type="file" class="manager-uploadinput"/>
-                  <p>Click, or drop files here to upload</p>
-                  <button class="closeuploadbtn" type="button" style="z-index: 2; padding: 5px;"></button>
-              </div>
-          </div>
-          <div class="manager-content"></div>
-      </div>
+        <div class="manager-wrapper">
+            <div class="manager-background">
+            <div class="manager-header">
+                <div class="manager-headerfloatleft">
+                    <button class="manager-btn exitbtn" type="button"></button>
+                    <button class="manager-btn uploadbtn" type="button"></button>
+                    <button class="manager-btn maxbtn" type="button"> </button>
+                </div>
+                <div class="manager-headerfloatright">
+                    <input type="search" placeholder="search" class="manager-searchinput" />
+                </div>
+            </div>
+            <div class="manager-container">
+                <button class="manager-insertbtn insertbtn hidden" type="button">
+                    <span class="manager-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="12" y1="18" x2="12" y2="12"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg></span>
+                    <span class="manager-btntext ">Insert File</span>
+                </button>
+                <div class="manager-uploader hidden">
+                    <div class="manager-uploadzone">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <input type="file" class="manager-uploadinput"/>
+                        <p>Click, or drop files here to upload</p>
+                        <button class="closeuploadbtn" type="button" style="z-index: 2; padding: 5px;"></button>
+                    </div>
+                </div>
+                <div class="manager-content"></div>
+            </div>
+        </div>
   </div>
       `;
     };
