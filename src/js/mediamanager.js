@@ -156,6 +156,7 @@ window.mediamanager = function(mediamanagerId, options, callback) {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             const id = 'managerItem' + i;
+            file.m_id = id
             const url = file.url ? tagStripper(file.url) : null;
             const src = file.src ? tagStripper(file.src) : null;
             const name = file.name ? tagStripper(file.name) : null;
@@ -196,9 +197,9 @@ window.mediamanager = function(mediamanagerId, options, callback) {
                 item.classList.remove('selected');
             });
             item.classList.add('selected');
-            selectedFiles[0] = {
-                url: item.getAttribute('data-fileUrl')
-            };
+            const id = item.getAttribute('data-fileId')
+            const singleSelection = fetchedFiles.filter(file=>file.m_id === id);
+            selectedFiles[0] = {...singleSelection[0]}
         }
 
         insertBtn.classList.remove('hidden');
