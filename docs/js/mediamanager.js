@@ -19,18 +19,24 @@ window.mediamanager = function(mediamanagerId, options, callback) {
     let mediamanagerOptions = {
         allowMultipleSelections: false,
         filterExtensions: false,
-        allowedExtensions: ['img', 'jpg', 'png'],
+        allowedExtensions: [],
+        imageExtensions: ['jpg', 'png', 'gif', 'webp', 'svg'],
         fallbackSrc: '',
         fnUpload: null,
         fnDownload: null
     };
+
+    const STATUS_CODE = {
+        0: 'error',
+        1: 'success'
+    }
 
     const start = () => {
         mediamanager = document.getElementById(mediamanagerId);
         mediamanagerOptions = { ...mediamanagerOptions, ...options };
 
         if (mediamanager === null || mediamanager === undefined) {
-            throw new Error('file manager id not defined');
+            setStatus(STATUS_CODE[0],'file manager id not defined');
         }
         //bind file manager
         mediamanager.innerHTML = '';
@@ -41,7 +47,7 @@ window.mediamanager = function(mediamanagerId, options, callback) {
         updateMangerItems();
     };
 
-    // manager functions
+    // initialize manager elements
     const bindElements = () => {
         exitBtn = document.querySelector(`#${mediamanagerId} .exitbtn`);
         uploadBtn = document.querySelector(`#${mediamanagerId} .uploadbtn`);
@@ -146,7 +152,7 @@ window.mediamanager = function(mediamanagerId, options, callback) {
                 fetchedFiles = await mediamanagerOptions.fnDownload();
                 files = fetchedFiles;
             } catch (error) {
-                throw new this.Error(error);
+                setStatus(STATUS_CODE[0],error)
             }
         } else {
             files = localFiles;
@@ -156,9 +162,8 @@ window.mediamanager = function(mediamanagerId, options, callback) {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             const id = 'managerItem' + i;
-            file.m_id = id
+            file.m_id = id;
             const url = file.url ? tagStripper(file.url) : null;
-            const src = file.src ? tagStripper(file.src) : null;
             const name = file.name ? tagStripper(file.name) : null;
             const type = file.type
                 ? file.type
@@ -166,8 +171,13 @@ window.mediamanager = function(mediamanagerId, options, callback) {
                 ? getFileExtension(url)
                 : null;
 
+            let src = mediamanagerOptions.fallbackSrc;
+            if (mediamanagerOptions.imageExtensions.includes(type)) {
+                src = file.src ? tagStripper(file.src) : mediamanagerOptions.fallbackSrc;
+            }
+
             if (checkIsNullOrUndefinedOrEmpty(url)) {
-                throw new Error('a url property is required for files.');
+                setStatus(STATUS_CODE[0],'a url property is required for files.')
             }
 
             managerContent.innerHTML += managerItemComponent(
@@ -197,9 +207,11 @@ window.mediamanager = function(mediamanagerId, options, callback) {
                 item.classList.remove('selected');
             });
             item.classList.add('selected');
-            const id = item.getAttribute('data-fileId')
-            const singleSelection = fetchedFiles.filter(file=>file.m_id === id);
-            selectedFiles[0] = {...singleSelection[0]}
+            const id = item.getAttribute('data-fileId');
+            const singleSelection = fetchedFiles.filter(
+                file => file.m_id === id
+            );
+            selectedFiles[0] = { ...singleSelection[0] };
         }
 
         insertBtn.classList.remove('hidden');
@@ -233,7 +245,7 @@ window.mediamanager = function(mediamanagerId, options, callback) {
             try {
                 await mediamanagerOptions.fnUpload(file);
             } catch (error) {
-                throw new Error(error);
+               setStatus(STATUS_CODE[0],error)
             }
             // close uploader when done & re-fetch files from the server
             toggleUploader();
@@ -241,7 +253,10 @@ window.mediamanager = function(mediamanagerId, options, callback) {
         }
     };
 
-    // send files to be inserted back to the editor
+    const setStatus=(type, errorMessage)=>{
+        console.error(type,errorMessage)
+    }
+
     const insertFiles = () => {
         // callback user-defined function
         callback(selectedFiles);

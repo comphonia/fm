@@ -10,7 +10,7 @@
 
 /*manager Styling*/
 
-.manager-wrapper{
+.manager-wrapper {
     width: 100%;
     height: 100%;
     display: flex;
@@ -20,7 +20,7 @@
     top: 0;
     left: 0;
     overflow: hidden;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     z-index: 50000;
 }
 
@@ -183,7 +183,6 @@
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
-
 }
 .manager-btn {
     margin-left: 5px;
