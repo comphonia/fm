@@ -1,6 +1,8 @@
 # Media Manager
 ### A minimalistic, multi-media manager.
 
+[DEMO](https://comphonia.github.io/mediamanager/)
+
 Media manager provides a basic layout for a web-based media manager. Open to customization.
 
 ![img](https://github.com/comphonia/mediamanager/blob/master/docs/p1.PNG?raw=true)
